@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon --inspect src/index.js",
-    "watch" : "node-sass --watch src/resources/scss -o src/public/css",
+    "watch": "node-sass --watch src/resources/scss -o src/public/css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -14,9 +14,20 @@
     "express": "^4.18.2",
     "express-handlebars": "^6.0.7"
   },
+  "lint-staged" : {
+    "src/**/*.{js,json,scss}" : "prettier --single-quote --trailing-comma all --tab-width 4 --write"
+  },
+  "husky" : {
+    "hooks" :{
+      "pre-commit" : "lint-staged"
+    }
+  },
   "devDependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^13.1.0",
     "morgan": "^1.10.0",
     "node-sass": "^8.0.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.3"
   }
 }
