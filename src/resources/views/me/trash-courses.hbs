@@ -1,7 +1,7 @@
 <div class="mt-4">
     <div>
-      <h3>khoa hoc cua toi</h3>
-      <a href="/me/trash/courses">thung rac</a>
+      <a href="/me/stored/courses">danh sach khoa hoc</a>
+      <h3>khoa hoc da xoa</h3>
     </div>
 
     <table class="table mt-4">
@@ -21,16 +21,16 @@
                 <td>{{this.level}}</td>
                 <td>{{this.createdAt}}</td>
                 <td>
-                    <a href="/courses/{{this._id}}/edit" class="btn btn-link">sua</a>
-                    <a href="" class="btn btn-link" data-id="{{this._id}}" data-toggle="modal" data-target="#delete-courses-modal">xoa</a>
+                    <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">khoi phuc</a>
+                    <a href="" class="btn btn-link" data-id="{{this._id}}" data-toggle="modal" data-target="#delete-courses-modal">xoa vinh vien</a>
                 </td>
             </tr>
             {{else}}
             <tr>
               <td colspan="5" class="text-center">
-                  ban chua dang khoa hoc nao.
+                  chua co khoa hoc nao bi xoa
                   <span> nhan vao day de</span>
-                  <a href="/courses/create">dang khoa hoc</a>
+                  <a href="/me/stored/courses">danh sach khoa hoc</a>
 
               </td>
             </tr>
@@ -51,19 +51,19 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>ban co chac muon xoa khong ?</p>
+        <p>hanh dong nay khong the khoi phuc . ban van muon xoa khoa hoc nay ?</p>
       </div>
       <div class="modal-footer">
-        <button id="btn-delete-course" type="button" class="btn btn-danger">delete</button>
+        <button id="btn-delete-course" type="button" class="btn btn-danger">delete vinh vien</button>
         <button  type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
 
-{{!-- delete hidden form --}}
 
 <form method="POST" name="delete-course-form"></form>
+<form method="POST" name="restore-course-form"></form>
 
 {{!-- script --}}
 
@@ -73,17 +73,26 @@
     var btnDelete = document.getElementById('btn-delete-course')
     var courseId;
     var deleteForm = document.forms['delete-course-form']
+    var restoreForm = document.forms['delete-course-form']
+    var restoreBtn = $('.btn-restore')
 
     // when dialog confirm clicked
     $('#delete-courses-modal').on('show.bs.modal', function(event) {
       var button = $(event.relatedTarget),
       courseId = button.data('id');
-      console.log(courseId)
 
       btnDelete.onclick = function() {
-        deleteForm.action = '/courses/' + courseId + '?_method=DELETE',
+        deleteForm.action = '/courses/' + courseId + '/force?_method=DELETE',
         deleteForm.submit()
       }
+      
     });
+      // restore btn click
+      restoreBtn.click(function (e) {
+        e.preventDefault()
+        var courseId = $(this).data('id')
+        restoreForm.action = '/courses/' + courseId + '/restore?_method=PATCH',
+        restoreForm.submit()
+      })
   })
 </script>
