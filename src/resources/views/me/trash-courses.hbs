@@ -10,7 +10,7 @@
                 <th scope="col">STT</th>
                 <th scope="col">Ten khoa hoc</th>
                 <th scope="col">trinh do</th>
-                <th scope="col" colspan="2">thoi gian tao</th>
+                <th scope="col" colspan="2">thoi gian xoa</th>
             </tr>
         </thead>
         <tbody>
@@ -19,7 +19,7 @@
                 <th scope="row">{{sum @index 1}}</th>
                 <td>{{this.name}}</td>
                 <td>{{this.level}}</td>
-                <td>{{this.createdAt}}</td>
+                <td>{{this.deletedAt}}</td>
                 <td>
                     <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">khoi phuc</a>
                     <a href="" class="btn btn-link" data-id="{{this._id}}" data-toggle="modal" data-target="#delete-courses-modal">xoa vinh vien</a>
