@@ -25,7 +25,12 @@
         <thead>
             <tr>
                 <th scope="col" colspan="2">STT</th>
-                <th scope="col">Ten khoa hoc</th>
+                <th scope="col">
+                  Ten khoa hoc
+                  <a href="?_sort&column=name&type=desc">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 8 8"><path fill="currentColor" d="M4 0L1 3h6L4 0zM1 5l3 3l3-3H1z"/></svg>
+                  </a>
+                </th>
                 <th scope="col">trinh do</th>
                 <th scope="col" colspan="2">thoi gian tao</th>
             </tr>
@@ -133,7 +138,7 @@
     })
 
     //checkAll submit btn clicked
-    checkAllBtnSubmit.on('submit', function (e) {
+    checkAllBtnSubmit.click('submit', function (e) {
       var isSubmitTable = !$(this).hasClass('disabled')
       if (!isSubmitTable) {
         e.preventDefault()
